@@ -1,0 +1,16 @@
+[Unit]
+Description=Kill Chrome on Logout
+Before=exit.target
+PartOf=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/true # A dummy command to satisfy ExecStart requirement
+ExecStop=/usr/bin/killall chrome
+# OR
+# ExecStop=/usr/local/bin/cleanup_chrome_close_all.sh
+RemainAfterExit=yes
+TimeoutStopSec=5
+
+[Install]
+WantedBy=exit.target
